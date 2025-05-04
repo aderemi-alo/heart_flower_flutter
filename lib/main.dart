@@ -272,93 +272,93 @@ class HeartFlowerPainter extends CustomPainter {
   }
 }
 
-class CurvedText extends StatelessWidget {
-  final String text;
-  final double radius;
-  final TextStyle textStyle;
-
-  const CurvedText({
-    Key? key,
-    required this.text,
-    required this.radius,
-    required this.textStyle,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: CurvedTextPainter(
-        text: text,
-        radius: radius,
-        textStyle: textStyle,
-      ),
-      size: Size(radius * 2, radius),
-    );
-  }
-}
-
-class CurvedTextPainter extends CustomPainter {
-  final String text;
-  final double radius;
-  final TextStyle textStyle;
-
-  CurvedTextPainter({
-    required this.text,
-    required this.radius,
-    required this.textStyle,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    // Position at the top of the semicircle instead of bottom
-    canvas.translate(size.width / 2, 0);
-
-    final textSpan = TextSpan(text: text, style: textStyle);
-
-    final textPainter = TextPainter(
-      text: textSpan,
-      textDirection: TextDirection.ltr,
-    );
-
-    textPainter.layout();
-
-    final textWidth = textPainter.width;
-
-    // Calculate the angle for each character
-    // Start from 0 and go to pi for top semicircle
-    double startAngle = (textWidth / radius) / 2;
-
-    for (int i = 0; i < text.length; i++) {
-      final charTextSpan = TextSpan(text: text[i], style: textStyle);
-
-      final charTextPainter = TextPainter(
-        text: charTextSpan,
-        textDirection: TextDirection.ltr,
-      );
-
-      charTextPainter.layout();
-
-      final charWidth = charTextPainter.width;
-      final halfCharWidth = charWidth / 2;
-      final angle = startAngle - (halfCharWidth / radius);
-
-      canvas.save();
-
-      canvas.rotate(angle);
-      canvas.translate(0, radius);
-
-      charTextPainter.paint(canvas, Offset(-halfCharWidth, 0));
-
-      canvas.restore();
-
-      startAngle -= charWidth / radius;
-    }
-  }
-
-  @override
-  bool shouldRepaint(CurvedTextPainter oldDelegate) {
-    return oldDelegate.text != text ||
-        oldDelegate.radius != radius ||
-        oldDelegate.textStyle != textStyle;
-  }
-}
+// class CurvedText extends StatelessWidget {
+//   final String text;
+//   final double radius;
+//   final TextStyle textStyle;
+//
+//   const CurvedText({
+//     Key? key,
+//     required this.text,
+//     required this.radius,
+//     required this.textStyle,
+//   }) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return CustomPaint(
+//       painter: CurvedTextPainter(
+//         text: text,
+//         radius: radius,
+//         textStyle: textStyle,
+//       ),
+//       size: Size(radius * 2, radius),
+//     );
+//   }
+// }
+//
+// class CurvedTextPainter extends CustomPainter {
+//   final String text;
+//   final double radius;
+//   final TextStyle textStyle;
+//
+//   CurvedTextPainter({
+//     required this.text,
+//     required this.radius,
+//     required this.textStyle,
+//   });
+//
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     // Position at the top of the semicircle instead of bottom
+//     canvas.translate(size.width / 2, 0);
+//
+//     final textSpan = TextSpan(text: text, style: textStyle);
+//
+//     final textPainter = TextPainter(
+//       text: textSpan,
+//       textDirection: TextDirection.ltr,
+//     );
+//
+//     textPainter.layout();
+//
+//     final textWidth = textPainter.width;
+//
+//     // Calculate the angle for each character
+//     // Start from 0 and go to pi for top semicircle
+//     double startAngle = (textWidth / radius) / 2;
+//
+//     for (int i = 0; i < text.length; i++) {
+//       final charTextSpan = TextSpan(text: text[i], style: textStyle);
+//
+//       final charTextPainter = TextPainter(
+//         text: charTextSpan,
+//         textDirection: TextDirection.ltr,
+//       );
+//
+//       charTextPainter.layout();
+//
+//       final charWidth = charTextPainter.width;
+//       final halfCharWidth = charWidth / 2;
+//       final angle = startAngle - (halfCharWidth / radius);
+//
+//       canvas.save();
+//
+//       canvas.rotate(angle);
+//       canvas.translate(0, radius);
+//
+//       charTextPainter.paint(canvas, Offset(-halfCharWidth, 0));
+//
+//       canvas.restore();
+//
+//       startAngle -= charWidth / radius;
+//     }
+//   }
+//
+//   @override
+//   bool shouldRepaint(CurvedTextPainter oldDelegate) {
+//     return oldDelegate.text != text ||
+//         oldDelegate.radius != radius ||
+//         oldDelegate.textStyle != textStyle;
+//   }
+// }
